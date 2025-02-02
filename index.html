@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veriscript</title>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="stylesheet" href="public/css/fonts.css">
+
+  <!-- Fun CSS Stuff -->
+  <link rel="stylesheet" href="public/css/text/mimic.min.css">
+  <link rel="stylesheet" href="public/css/text/animista-popoverWarning.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Syntax Highlighting for Code -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <div style="position: relative;">
+      <div style="text-align: center;">
+        <h1>veriscript.sh<span class="blinking-char">_</span></h1>
+      </div>
+      <button id="resetPrefsBtn" class="brutalBox" style="position: absolute; top: 0; right: 0;">
+        Reset
+        <i class="fa-solid fa-arrows-rotate"></i>
+        Prefs
+      </button>
+    </div>
+    <h3>Public toolbox of helpful scripts</h3>
+
+    <p>
+      <strong>Instructions:</strong><br>
+      - Click <i class="fa-regular fa-eye"></i> to view the script.<br>
+      - Click <i class="fa-regular fa-clipboard"></i> to copy the run cmd.<br>
+      - Paste the command in your terminal to run the script.
+    </p>
+    <label for="colorPicker">Pick theme color:</label>
+    <input type="color" id="colorPicker" value="#000000"><br>
+
+    <!-- <div id="hexValue">Hex Code: #000000</div> -->
+  </header>
+
+  <!-- Warning Popover for user -->
+  <div id="initialPopoverContainer">
+    <div id="initialPopover">
+      <p>
+        This is a public collection of scripts aimed to help you automate tasks and solve problems.
+      </p>
+      <p style="font-style: italic; font-size: 1.2em;">
+        It's a really bad idea to BLINDLY execute scripts from strangers online
+      </p>
+      <p>
+        Please review any script and understand what it does before running it on your machine.
+      </p>
+      <p>
+        <!-- &lt;&lt; Click anywhere to continue &gt;&gt; -->
+        Acknowledge: <button class="brutalBox" id="warnBtnOnce">Once</button> <button class="brutalBox" id="warnBtnEver">Forever</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- Code Popover -->
+  <div id="codePopoverContainer" style="display: none;">
+    <pre>
+      <code id="codeContent"></code>
+    </pre>
+    <p id="closeCode">
+      &lt;&lt; Click here to continue &gt;&gt;
+    </p>
+
+  </div>
+
+  <!-- HTML File Tree -->
+
+  <div id="fileTreeContainer"><ul><li>run-command<ul></ul></li><li>cloud<ul><li>aws<ul><li>eks<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/cloud/aws/eks/test.py"></i><code name="public/content/cloud/aws/eks/test.py" data-file-format="py">test</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/cloud/aws/eks/test.py"></i></li></ul></li></ul></li></ul></li><li>kubernetes<ul></ul></li><li>shell<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/helloworld.sh"></i><code name="public/content/shell/helloworld.sh" data-file-format="sh">helloworld</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/helloworld.sh"></i></li><li>network<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/network/listening-ports.sh"></i><code name="public/content/shell/network/listening-ports.sh" data-file-format="sh">listening-ports</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/network/listening-ports.sh"></i></li></ul></li></ul></li></ul></div>
+
+  <footer id="footer">
+  </footer>
+
+  <script>
+
+  </script>
+  <script type="module" src="public/js/main.js"></script>
+  <script type="module" src="public/js/build-content.js"></script>
+  <script type="module" src="public/js/components.js"></script>
+  <script type="module" src="public/js/helpers.js"></script>
+</body>
+
+</html>

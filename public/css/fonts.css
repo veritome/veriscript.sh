@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "veriscriptfont";
+  src: url("../fonts/vt/VT323-Regular.ttf")
+    format("truetype");
+}
+
+body {
+  font-family: "veriscriptfont", sans-serif;
+}
+
+code {
+  font-family: "veriscriptfont", sans-serif;
+}
