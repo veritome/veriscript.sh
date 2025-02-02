@@ -93,7 +93,7 @@ button:hover {
   color: var(--text-color);
 }
 code {
-  color: red;
+  /* color: red; */
   text-align: left;
 }
 
@@ -142,4 +142,12 @@ footer p {
   font-family: "veriscriptfont", sans-serif;
   box-shadow: 8px 8px 0px var(--secondary-color);
   font-size: 1.2em;
+}
+
+#fileTreeContainer {
+  color: var(--content-text-color);
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }

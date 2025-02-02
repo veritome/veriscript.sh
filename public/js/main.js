@@ -3,12 +3,9 @@ import * as helpers from './helpers.js';
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const root = document.documentElement;
-  root.style.setProperty('--primary-color', localStorage.getItem('veriscript-primaryColor') || '#d5af90');
-  root.style.setProperty('--secondary-color', localStorage.getItem('veriscript-secondaryColor') || '#000000');
-  root.style.setProperty('--accent-color', localStorage.getItem('veriscript-accentColor') || '#ff9900');
-  root.style.setProperty('--text-color', localStorage.getItem('veriscript-textColor') || '#000000');
-  root.style.setProperty('--background-color', localStorage.getItem('veriscript-backgroundColor') || '#ffffff');
+  const primaryColor = localStorage.getItem('veriscript-primaryColor') || '#c26161';
 
+  helpers.setColorScheme(root, primaryColor);
 
   components.footer();
 
@@ -29,6 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
 });
+
 
 
 

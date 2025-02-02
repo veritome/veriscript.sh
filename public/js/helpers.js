@@ -36,7 +36,7 @@ export function acknowledgeWarning(button) {
 }
 
 export function copyToClipboard(url, x, y) {
-  var text = `curl --silent ${url} | bash`;
+  var text = `curl -s ${url} | bash -s -- `;
 
   navigator.clipboard.writeText(text)
     .then(function () {
@@ -48,26 +48,7 @@ export function copyToClipboard(url, x, y) {
 
 export function updateColor(value) {
   document.documentElement.style.setProperty('--primary-color', value);
-
-  const { r, g, b } = hexToRgb(value);
-
-  let luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-
-  const root = document.documentElement;
-
-  if (luminance > 0.5) {
-    // console.log("Light mode");
-    // Light
-    root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--background-color', '#ffffff');
-  } else {
-    // console.log("Dark mode");
-    // Dark
-    root.style.setProperty('--text-color', '#ffffff');
-    root.style.setProperty('--background-color', '#000000');
-  }
-
-  saveColorScheme(root);
+  setColorScheme(document.documentElement, value);
 }
 
 export function hexToRgb(hex) {
@@ -81,4 +62,56 @@ export function hexToRgb(hex) {
 
   // Return RGB object
   return { r, g, b };
+}
+
+export function rgbToHex(r, g, b) {
+  // Convert RGB components to hex
+  const hex = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return hex;
+}
+
+export function darkenRgb(r, g, b, percent) {
+  // Calculate darkening factor
+  const factor = 1 - (percent / 100);
+
+  // Darken each component
+  const newR = Math.max(Math.round(r * factor), 0);
+  const newG = Math.max(Math.round(g * factor), 0);
+  const newB = Math.max(Math.round(b * factor), 0);
+
+  // Return the new RGB object
+  return { newR, newG, newB };
+}
+
+export function toDarkHex(hex, percent) {
+  const { r, g, b } = hexToRgb(hex);
+  const { newR, newG, newB } = darkenRgb(r, g, b, percent);
+  return rgbToHex(newR, newG, newB);
+}
+
+export function isDarkHex(hex) {
+  const { r, g, b } = hexToRgb(hex);
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance < 0.5;
+}
+
+export function setColorScheme(root, currentPrimaryColor) {
+
+  if (isDarkHex(currentPrimaryColor)) {
+    root.style.setProperty('--primary-color', currentPrimaryColor);
+    root.style.setProperty('--secondary-color', toDarkHex(currentPrimaryColor, 70)); // Shadow and borders
+    root.style.setProperty('--accent-color', '#000000');  //Button background
+    root.style.setProperty('--text-color', '#FFFFFF');
+    root.style.setProperty('--content-text-color', '#000000');
+    root.style.setProperty('--background-color', toDarkHex(currentPrimaryColor, -70));
+  } else {
+    root.style.setProperty('--primary-color', currentPrimaryColor);
+    root.style.setProperty('--secondary-color', toDarkHex(currentPrimaryColor, -70));
+    root.style.setProperty('--accent-color', '#000000');
+    root.style.setProperty('--text-color', '#000000');
+    root.style.setProperty('--content-text-color', '#FFFFFF');
+    root.style.setProperty('--background-color', toDarkHex(currentPrimaryColor, 70));
+  }
+
+  saveColorScheme(root);
 }
