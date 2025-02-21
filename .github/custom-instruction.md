@@ -1,0 +1,1 @@
+Prioritize simplicity and readable code. Double check suggestions before completing requests.
