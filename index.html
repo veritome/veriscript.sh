@@ -26,75 +26,118 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+  <style>
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin-bottom: 60px;
+    }
+    .category-card {
+      border: 3px solid var(--secondary-color);
+      box-shadow: 8px 8px 0px var(--secondary-color);
+      padding: 20px;
+      background-color: var(--primary-color);
+    }
+    .category-title {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 10px;
+    }
+    .script-list {
+      list-style: none;
+      padding: 0;
+    }
+    .script-item {
+      margin: 10px 0;
+      padding: 8px;
+      border: 2px solid var(--secondary-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <div style="position: relative;">
-      <div style="text-align: center;">
-        <h1>veriscript.sh<span class="blinking-char">_</span></h1>
+  <div class="page-wrapper">
+    <div class="main-content">
+      <header>
+        <div style="position: relative;">
+          <div style="text-align: center;">
+            <h1>veriscript.sh<span class="blinking-char">_</span></h1>
+          </div>
+          <button id="resetPrefsBtn" class="brutalBox" style="position: absolute; top: 0; right: 0;">
+            Reset
+            <i class="fa-solid fa-arrows-rotate"></i>
+            Prefs
+          </button>
+        </div>
+        <h3>Public toolbox of helpful scripts</h3>
+
+        <p>
+          <strong>Instructions:</strong><br>
+          - Click <i class="fa-regular fa-eye"></i> to view the script.<br>
+          - Click <i class="fa-regular fa-clipboard"></i> to copy the run cmd.<br>
+          - Paste the command in your terminal to run the script.
+        </p>
+        <label for="colorPicker">Pick theme color:</label>
+        <input type="color" id="colorPicker" value="#000000"><br>
+
+        <!-- <div id="hexValue">Hex Code: #000000</div> -->
+      </header>
+
+      <!-- Add Search Bar -->
+      <div class="search-container">
+        <input type="text" class="search-bar" id="scriptSearch" placeholder="Search scripts by name or category...">
       </div>
-      <button id="resetPrefsBtn" class="brutalBox" style="position: absolute; top: 0; right: 0;">
-        Reset
-        <i class="fa-solid fa-arrows-rotate"></i>
-        Prefs
-      </button>
-    </div>
-    <h3>Public toolbox of helpful scripts</h3>
 
-    <p>
-      <strong>Instructions:</strong><br>
-      - Click <i class="fa-regular fa-eye"></i> to view the script.<br>
-      - Click <i class="fa-regular fa-clipboard"></i> to copy the run cmd.<br>
-      - Paste the command in your terminal to run the script.
-    </p>
-    <label for="colorPicker">Pick theme color:</label>
-    <input type="color" id="colorPicker" value="#000000"><br>
+      <!-- Warning Popover for user -->
+      <div id="initialPopoverContainer">
+        <div id="initialPopover">
+          <p>
+            This is a public collection of scripts aimed to help you automate tasks and solve problems.
+          </p>
+          <p style="font-style: italic; font-size: 1.2em;">
+            It's a really bad idea to BLINDLY execute scripts from strangers online
+          </p>
+          <p>
+            Please review any script and understand what it does before running it on your machine.
+          </p>
+          <p>
+            <!-- &lt;&lt; Click anywhere to continue &gt;&gt; -->
+            Acknowledge: <button class="brutalBox" id="warnBtnOnce">Once</button> <button class="brutalBox"
+              id="warnBtnEver">Forever</button>
+          </p>
+        </div>
+      </div>
 
-    <!-- <div id="hexValue">Hex Code: #000000</div> -->
-  </header>
+      <!-- Code Popover -->
+      <div id="codePopoverContainer" style="display: none;">
+        <pre>
+          <code id="codeContent"></code>
+        </pre>
+        <p id="closeCode">
+          &lt;&lt; Click here to continue &gt;&gt;
+        </p>
 
-  <!-- Warning Popover for user -->
-  <div id="initialPopoverContainer">
-    <div id="initialPopover">
-      <p>
-        This is a public collection of scripts aimed to help you automate tasks and solve problems.
-      </p>
-      <p style="font-style: italic; font-size: 1.2em;">
-        It's a really bad idea to BLINDLY execute scripts from strangers online
-      </p>
-      <p>
-        Please review any script and understand what it does before running it on your machine.
-      </p>
-      <p>
-        <!-- &lt;&lt; Click anywhere to continue &gt;&gt; -->
-        Acknowledge: <button class="brutalBox" id="warnBtnOnce">Once</button> <button class="brutalBox"
-          id="warnBtnEver">Forever</button>
-      </p>
+      </div>
+
+      <!-- HTML File Tree -->
+      <main>
+        <div id="fileTreeContainer" class="card-container">
+          <!-- Content will be dynamically generated -->
+        </div>
+      </main>
     </div>
   </div>
 
-  <!-- Code Popover -->
-  <div id="codePopoverContainer" style="display: none;">
-    <pre>
-      <code id="codeContent"></code>
-    </pre>
-    <p id="closeCode">
-      &lt;&lt; Click here to continue &gt;&gt;
-    </p>
-
-  </div>
-
-  <!-- HTML File Tree -->
-  <main>
-    <div id="fileTreeContainer"><ul><li>shell<ul><li>security<ul><li>ssh<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/security/ssh/generate.sh"></i><code name="public/content/shell/security/ssh/generate.sh" data-file-format="sh">generate</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/security/ssh/generate.sh"></i></li><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/security/ssh/backup.sh"></i><code name="public/content/shell/security/ssh/backup.sh" data-file-format="sh">backup</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/security/ssh/backup.sh"></i></li></ul></li><li>gpg<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/security/gpg/generate.sh"></i><code name="public/content/shell/security/gpg/generate.sh" data-file-format="sh">generate</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/security/gpg/generate.sh"></i></li><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/security/gpg/backup.sh"></i><code name="public/content/shell/security/gpg/backup.sh" data-file-format="sh">backup</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/security/gpg/backup.sh"></i></li></ul></li></ul></li><li>network<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/shell/network/listening-ports.sh"></i><code name="public/content/shell/network/listening-ports.sh" data-file-format="sh">listening-ports</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/shell/network/listening-ports.sh"></i></li></ul></li></ul></li><li>tools<ul><li class="listing"><i class="fa-regular fa-eye icon-right-padding" name="public/content/tools/install_nvm.sh"></i><code name="public/content/tools/install_nvm.sh" data-file-format="sh">install nvm</code><i class="fa-regular fa-clipboard icon-left-padding" name="public/content/tools/install_nvm.sh"></i></li></ul></li></ul></div>
-  </main>
   <footer id="footer">
   </footer>
 
-  <script>
-
-  </script>
   <script type="module" src="public/js/main.js"></script>
   <script type="module" src="public/js/build-content.js"></script>
   <script type="module" src="public/js/components.js"></script>

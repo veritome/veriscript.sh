@@ -151,3 +151,147 @@ footer p {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+
+/* Responsive Design & Mobile Optimizations */
+@media screen and (max-width: 768px) {
+  header {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .card-container {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .category-card {
+    padding: 15px;
+  }
+
+  .script-item {
+    padding: 12px 8px;
+    margin: 8px 0;
+  }
+
+  /* Larger touch targets for mobile */
+  .script-item i {
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Search Bar Styles */
+.search-container {
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px var(--secondary-color);
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 6px 6px 0px var(--secondary-color);
+}
+
+/* Remove sidebar navigation styles */
+.page-wrapper {
+  min-height: 100vh;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+/* Remove mobile navigation menu styles */
+.mobile-nav-toggle {
+  display: none;
+}
+
+/* Keep existing responsive design & mobile optimizations */
+@media screen and (max-width: 768px) {
+  .search-container {
+    padding: 0 15px;
+  }
+  
+  .search-bar {
+    padding: 10px;
+  }
+}
+
+.category-card {
+  border: 3px solid var(--secondary-color);
+  box-shadow: 8px 8px 0px var(--secondary-color);
+  padding: 20px;
+  background-color: var(--primary-color);
+  display: block;
+}
+
+.script-item {
+  margin: 10px 0;
+  padding: 8px;
+  border: 2px solid var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Updated rules for script icons */
+.script-item i {
+  font-size: 1.4em; /* increased base size */
+  margin: 0 8px;  /* increased spacing */
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.script-item i:hover {
+  transform: scale(1.3);
+  color: var(--secondary-color);
+}
+
+/* Ensure the script name code remains larger, metadata stays the same */
+.script-item code {
+  font-size: 1.3em; /* larger script name */
+  transition: font-size 0.2s ease;
+}
+
+/* New rules for script icons */
+.script-item i {
+  font-size: 1.2em;
+  margin: 0 5px;
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.script-item i:hover {
+  transform: scale(1.3);
+  color: var(--secondary-color);
+}
+
+/* New hover effects for script items and script names */
+.script-item:hover {
+  transform: scale(1.05);
+  background-color: var(--background-color);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.script-item code {
+  font-size: 1.3em; /* Increased size for script name */
+  transition: font-size 0.2s ease;
+}

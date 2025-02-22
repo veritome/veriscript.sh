@@ -96,22 +96,20 @@ export function isDarkHex(hex) {
 }
 
 export function setColorScheme(root, currentPrimaryColor) {
-
   if (isDarkHex(currentPrimaryColor)) {
     root.style.setProperty('--primary-color', currentPrimaryColor);
     root.style.setProperty('--secondary-color', toDarkHex(currentPrimaryColor, 70)); // Shadow and borders
     root.style.setProperty('--accent-color', '#000000');  //Button background
     root.style.setProperty('--text-color', '#FFFFFF');
-    root.style.setProperty('--content-text-color', '#000000');
+    root.style.setProperty('--content-text-color', '#FFFFFF'); // Changed to white for dark mode
     root.style.setProperty('--background-color', toDarkHex(currentPrimaryColor, -70));
   } else {
     root.style.setProperty('--primary-color', currentPrimaryColor);
     root.style.setProperty('--secondary-color', toDarkHex(currentPrimaryColor, -70));
     root.style.setProperty('--accent-color', '#000000');
     root.style.setProperty('--text-color', '#000000');
-    root.style.setProperty('--content-text-color', '#FFFFFF');
+    root.style.setProperty('--content-text-color', '#000000'); // Changed to black for light mode
     root.style.setProperty('--background-color', toDarkHex(currentPrimaryColor, 70));
   }
-
   saveColorScheme(root);
 }
