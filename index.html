@@ -67,33 +67,37 @@
     <div class="main-content">
       <header>
         <div style="position: relative;">
-          <div style="text-align: center;">
-            <h1>veriscript.sh<span class="blinking-char">_</span></h1>
+          <div style="position: absolute; top: 0; left: 0; display: flex; flex-direction: column; gap: 10px; text-align: left;">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <button id="themeToggle" class="header-button">
+                <i class="fa-solid fa-moon"></i>
+                <span>Toggle Theme</span>
+              </button>
+              <button id="resetPrefsBtn" class="header-button">
+                Reset
+                <i class="fa-solid fa-arrows-rotate"></i>
+                Prefs
+              </button>
+            </div>
           </div>
-          <button id="resetPrefsBtn" class="brutalBox" style="position: absolute; top: 0; right: 0;">
-            Reset
-            <i class="fa-solid fa-arrows-rotate"></i>
-            Prefs
-          </button>
+          <div style="text-align: center;">
+            <h1>veriscript.sh<span class="blinking-char">_</span>
+              <i class="fa-solid fa-circle-info info-icon" id="infoIcon"></i>
+              <div class="info-popover">
+                <strong>Instructions:</strong><br>
+                - Click <i class="fa-regular fa-eye"></i> to view the script.<br>
+                - Click <i class="fa-regular fa-clipboard"></i> to copy the run cmd.<br>
+                - Paste the command in your terminal to run the script.
+              </div>
+            </h1>
+          </div>
         </div>
         <h3>Public toolbox of helpful scripts</h3>
-
-        <p>
-          <strong>Instructions:</strong><br>
-          - Click <i class="fa-regular fa-eye"></i> to view the script.<br>
-          - Click <i class="fa-regular fa-clipboard"></i> to copy the run cmd.<br>
-          - Paste the command in your terminal to run the script.
-        </p>
-        <label for="colorPicker">Pick theme color:</label>
-        <input type="color" id="colorPicker" value="#000000"><br>
-
-        <!-- <div id="hexValue">Hex Code: #000000</div> -->
+        <!-- Moved search bar into header -->
+        <div class="search-container">
+          <input type="text" class="search-bar" id="scriptSearch" placeholder="Search scripts by name or category...">
+        </div>
       </header>
-
-      <!-- Add Search Bar -->
-      <div class="search-container">
-        <input type="text" class="search-bar" id="scriptSearch" placeholder="Search scripts by name or category...">
-      </div>
 
       <!-- Warning Popover for user -->
       <div id="initialPopoverContainer">

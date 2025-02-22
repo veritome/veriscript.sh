@@ -1,6 +1,7 @@
 import * as helpers from './helpers.js';
 import { copyToClipboard } from './helpers.js';
 import { contentConfig } from './content-config.js';
+import { initializeSearch } from './main.js';
 
 function displayCodeViewer(codePopoverContainer, codeContent, url, fileFormat) {
   fetch(url)
@@ -116,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
   contentConfig.categories.forEach(category => {
     container.appendChild(createCategory(category));
   });
+
+  // Initialize search functionality after content is loaded
+  initializeSearch();
 
   // Set up click handlers for view icons
   document.querySelectorAll('.fa-eye').forEach(icon => {
