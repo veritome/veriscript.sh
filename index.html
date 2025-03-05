@@ -28,6 +28,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
   <style>
+    /* Container styles moved to style.css */
+    
     .card-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -35,29 +37,38 @@
       padding: 20px;
       margin-bottom: 60px;
     }
+    
     .category-card {
       border: 3px solid var(--secondary-color);
       box-shadow: 8px 8px 0px var(--secondary-color);
       padding: 20px;
       background-color: var(--primary-color);
     }
+    
     .category-title {
       font-size: 1.5em;
       margin-bottom: 15px;
       border-bottom: 2px solid var(--secondary-color);
       padding-bottom: 10px;
     }
+    
     .script-list {
       list-style: none;
       padding: 0;
     }
+    
     .script-item {
       margin: 10px 0;
       padding: 8px;
-      border: 2px solid var(--secondary-color);
+      /* Border removed */
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    
+    /* Hide script metadata */
+    .script-metadata {
+      display: none;
     }
   </style>
 </head>

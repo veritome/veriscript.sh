@@ -45,16 +45,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('warnBtnEver')?.addEventListener('click', (event) => {
     helpers.acknowledgeWarning(event.target);
   });
-});
 
-// Function to initialize search functionality
-function initializeSearch() {
+  // Search functionality
   const searchBar = document.getElementById('scriptSearch');
   const scriptItems = document.querySelectorAll('.script-item');
   const categories = document.querySelectorAll('.category-card');
   const sections = document.querySelectorAll('.category-card h3');
-
-  if (!searchBar) return; // Exit if search bar doesn't exist
 
   searchBar.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -64,33 +60,25 @@ function initializeSearch() {
       const scriptName = item.querySelector('code').textContent.toLowerCase();
       const metadata = item.querySelector('.script-metadata')?.textContent.toLowerCase() || '';
       const matches = scriptName.includes(searchTerm) || metadata.includes(searchTerm);
-      item.style.display = matches ? 'block' : 'none';
+      item.style.display = matches ? '' : 'none';
       if (matches) hasVisibleItems = true;
     });
 
     // Show/hide sections based on visible items
     sections.forEach(section => {
       const nextElement = section.nextElementSibling;
-      if (nextElement) {
-        const visibleItems = nextElement.querySelectorAll('.script-item').length > 0 &&
-          Array.from(nextElement.querySelectorAll('.script-item'))
-            .some(item => item.style.display !== 'none');
-        section.style.display = visibleItems ? 'block' : 'none';
-      }
+      const visibleItems = nextElement.querySelectorAll('.script-item[style=""]').length;
+      section.style.display = visibleItems > 0 ? '' : 'none';
     });
 
     // Show/hide categories based on visible items
     categories.forEach(category => {
-      const visibleItems = category.querySelectorAll('.script-item').length > 0 &&
-        Array.from(category.querySelectorAll('.script-item'))
-          .some(item => item.style.display !== 'none');
-      category.style.display = visibleItems ? 'block' : 'none';
+      const visibleItems = category.querySelectorAll('.script-item[style=""]').length;
+      category.style.display = visibleItems > 0 ? '' : 'none';
     });
   });
-}
 
-// Export the search initialization function
-export { initializeSearch };
+});
 
 
 

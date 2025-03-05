@@ -1,20 +1,20 @@
 /* Color schemes with transitions */
 :root {
-  --primary-color: #FFFFF0;  /* ivory */
-  --secondary-color: #064874; /* navy blue */
-  --accent-color: #064874;
-  --text-color: #064874;
-  --background-color: #FFFFF0;
+  --primary-color: #FFFFE2;  /* ivory */
+  --secondary-color: #083757; /* navy blue */
+  --accent-color: #083757;
+  --text-color: #083757;
+  --background-color: #FFFFE2;
   --transition-colors: background-color 0.05s ease, color 0.05s ease, border-color 0.05s ease;
   --transition-transform: transform 0.05s ease, box-shadow 0.05s ease;
 }
 
 [data-theme="dark"] {
-  --primary-color: #064874;  /* navy blue */
-  --secondary-color: #FFD700; /* yellow */
-  --accent-color: #FFD700;
-  --text-color: #FFD700;
-  --background-color: #064874;
+  --primary-color: #083757;  /* navy blue */
+  --secondary-color: #FFFFE2; /* changed from yellow to ivory */
+  --accent-color: #FFFFE2; /* changed from yellow to ivory */
+  --text-color: #FFFFE2; /* changed from yellow to ivory */
+  --background-color: #083757;
 }
 
 /* Add smooth transitions for theme changes */
@@ -278,10 +278,14 @@ footer p {
 /* Remove sidebar navigation styles */
 .page-wrapper {
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .main-content {
   padding: 20px;
+  width: 100%;
+  max-width: 70%;
 }
 
 /* Remove mobile navigation menu styles */
@@ -293,6 +297,11 @@ footer p {
 @media screen and (max-width: 768px) {
   .search-container {
     padding: 0 1rem;
+  }
+
+  .main-content {
+    max-width: 100%;
+    padding: 10px;
   }
 }
 
@@ -321,13 +330,10 @@ footer p {
   align-items: center;
   justify-content: space-between;
   transition: var(--transition-colors), var(--transition-transform);
-  border: 2px solid var(--secondary-color);
-  box-shadow: 4px 4px 0px var(--secondary-color);
 }
 
 .script-item:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--secondary-color);
 }
 
 /* Updated rules for script icons */
@@ -340,10 +346,10 @@ footer p {
 
 .script-item i:hover {
   transform: scale(1.3);
-  color: var (--secondary-color);
+  color: var(--secondary-color);
 }
 
-/* Ensure the script name code remains larger, metadata stays the same */
+/* Ensure the script name code remains larger */
 .script-item code {
   font-size: 1.3em; /* larger script name */
   transition: font-size 0.2s ease;

@@ -1,7 +1,6 @@
 import * as helpers from './helpers.js';
 import { copyToClipboard } from './helpers.js';
 import { contentConfig } from './content-config.js';
-import { initializeSearch } from './main.js';
 
 function displayCodeViewer(codePopoverContainer, codeContent, url, fileFormat) {
   fetch(url)
@@ -41,16 +40,7 @@ function createScriptItem(script) {
   codeElement.setAttribute('data-file-format', script.format);
   codeElement.textContent = script.name;
 
-  const metadata = document.createElement('div');
-  metadata.className = 'script-metadata';
-  metadata.innerHTML = `
-    <span>Last updated: <time datetime="${script.metadata.lastUpdated}">${new Date(script.metadata.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time></span> |
-    <span>Author: ${script.metadata.author}</span> |
-    <span>Dependencies: ${script.metadata.dependencies}</span>
-  `;
-
   leftContent.appendChild(codeElement);
-  leftContent.appendChild(metadata);
 
   const rightContent = document.createElement('div');
   const eyeIcon = document.createElement('i');
@@ -117,9 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
   contentConfig.categories.forEach(category => {
     container.appendChild(createCategory(category));
   });
-
-  // Initialize search functionality after content is loaded
-  initializeSearch();
 
   // Set up click handlers for view icons
   document.querySelectorAll('.fa-eye').forEach(icon => {
