@@ -48,11 +48,16 @@ function createScriptItem(script) {
   eyeIcon.setAttribute('name', script.path);
   
   const clipboardIcon = document.createElement('i');
-  clipboardIcon.className = 'fa-regular fa-clipboard';
+  clipboardIcon.className = 'fa-regular fa-clipboard icon-right-padding';
   clipboardIcon.setAttribute('name', script.path);
+  
+  const downloadIcon = document.createElement('i');
+  downloadIcon.className = 'fa-solid fa-download';
+  downloadIcon.setAttribute('name', script.path);
 
   rightContent.appendChild(eyeIcon);
   rightContent.appendChild(clipboardIcon);
+  rightContent.appendChild(downloadIcon);
 
   scriptItem.appendChild(leftContent);
   scriptItem.appendChild(rightContent);
@@ -128,6 +133,44 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = rect.top;
       const scriptUrl = window.location.origin + '/' + scriptPath;
       copyToClipboard(scriptUrl, x, y);
+    });
+  });
+  
+  // Set up click handlers for download icons
+  document.querySelectorAll('.fa-download').forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      const scriptPath = e.target.getAttribute('name');
+      const scriptUrl = window.location.origin + '/' + scriptPath;
+      const rect = e.target.getBoundingClientRect();
+      const x = rect.left;
+      const y = rect.top;
+      
+      // Create a temporary anchor element to trigger the download
+      fetch(scriptUrl)
+        .then(response => response.text())
+        .then(content => {
+          const element = document.createElement('a');
+          const fileName = scriptPath.split('/').pop();
+          const blob = new Blob([content], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          
+          element.setAttribute('href', url);
+          element.setAttribute('download', fileName);
+          element.style.display = 'none';
+          
+          document.body.appendChild(element);
+          element.click();
+          
+          // Clean up
+          document.body.removeChild(element);
+          URL.revokeObjectURL(url);
+          
+          smallPopUpBox('Downloaded!', x, y);
+        })
+        .catch(error => {
+          console.error('Error downloading script:', error);
+          smallPopUpBox('Download failed!', x, y);
+        });
     });
   });
 
