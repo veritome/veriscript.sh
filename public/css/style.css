@@ -334,6 +334,9 @@ button:hover, .header-button:hover {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Footer */
@@ -431,5 +434,9 @@ footer p {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  
+  #fileTreeContainer {
+    width: 90vw;
   }
 }
