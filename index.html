@@ -32,15 +32,16 @@
     
     .card-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       padding: 20px;
       margin-bottom: 60px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .category-card {
-      border: 3px solid var(--secondary-color);
-      box-shadow: 8px 8px 0px var(--secondary-color);
       padding: 20px;
       background-color: var(--primary-color);
     }
@@ -48,7 +49,6 @@
     .category-title {
       font-size: 1.5em;
       margin-bottom: 15px;
-      border-bottom: 2px solid var(--secondary-color);
       padding-bottom: 10px;
     }
     
@@ -78,21 +78,9 @@
     <div class="main-content">
       <header>
         <div style="position: relative;">
-          <div style="position: absolute; top: 0; left: 0; display: flex; flex-direction: column; gap: 10px; text-align: left;">
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-              <button id="themeToggle" class="header-button">
-                <i class="fa-solid fa-moon"></i>
-                <span>Toggle Theme</span>
-              </button>
-              <button id="resetPrefsBtn" class="header-button">
-                Reset
-                <i class="fa-solid fa-arrows-rotate"></i>
-                Prefs
-              </button>
-            </div>
-          </div>
-          <div style="text-align: center;">
-            <h1>veriscript.sh<span class="blinking-char">_</span>
+          <!-- Icons moved to top-right corner -->
+          <div class="top-right-icons">
+            <div class="icon-wrapper">
               <i class="fa-solid fa-circle-info info-icon" id="infoIcon"></i>
               <div class="info-popover">
                 <strong>Instructions:</strong><br>
@@ -100,7 +88,25 @@
                 - Click <i class="fa-regular fa-clipboard"></i> to copy the run cmd.<br>
                 - Paste the command in your terminal to run the script.
               </div>
-            </h1>
+            </div>
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-gear settings-icon" id="settingsIcon"></i>
+              <div class="settings-popover">
+                <button id="themeToggle" class="header-button">
+                  <i class="fa-solid fa-moon"></i>
+                  <span>Toggle Theme</span>
+                </button>
+                <button id="resetPrefsBtn" class="header-button">
+                  Reset
+                  <i class="fa-solid fa-arrows-rotate"></i>
+                  Prefs
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div style="text-align: center;">
+            <h1>veriscript.sh<span class="blinking-char">_</span></h1>
           </div>
         </div>
         <h3>Public toolbox of helpful scripts</h3>

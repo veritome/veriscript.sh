@@ -38,9 +38,7 @@ export function smallPopUpBox(text, x, y, exitTime = 1000) {
     left: ${x}px;
     transform: translate(-50%, -50%);
     background-color: var(--primary-color);
-    border: 3px solid var(--secondary-color);
     padding: 15px 30px;
-    box-shadow: 4px 4px 0px var(--shadow-color);
     font-family: "veriscriptfont", sans-serif;
     font-size: 1.2em;
     z-index: 2000;

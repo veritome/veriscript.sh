@@ -46,6 +46,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
     helpers.acknowledgeWarning(event.target);
   });
 
+  // Settings icon popover handling
+  const settingsIcon = document.getElementById('settingsIcon');
+  const settingsPopover = document.querySelector('.settings-popover');
+  let isSettingsPopoverOpen = false;
+
+  // Show/hide settings popover on click
+  settingsIcon.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent document click from immediately closing it
+    
+    if (isSettingsPopoverOpen) {
+      settingsPopover.style.display = 'none';
+      isSettingsPopoverOpen = false;
+    } else {
+      // Position the popover at the mouse cursor
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      // Ensure popover stays within viewport
+      const popoverWidth = 200; // min-width from CSS
+      const popoverHeight = 120; // Approximate height
+      
+      // Calculate position to keep popover in viewport
+      let left = mouseX;
+      let top = mouseY + 10; // Small offset from cursor
+      
+      // Adjust if would go off right edge
+      if (left + popoverWidth > window.innerWidth) {
+        left = window.innerWidth - popoverWidth - 10;
+      }
+      
+      // Adjust if would go off bottom edge
+      if (top + popoverHeight > window.innerHeight) {
+        top = mouseY - popoverHeight - 10;
+      }
+      
+      settingsPopover.style.left = `${left}px`;
+      settingsPopover.style.top = `${top}px`;
+      settingsPopover.style.display = 'block';
+      isSettingsPopoverOpen = true;
+    }
+  });
+
+  // Close popover when clicking elsewhere
+  document.addEventListener('click', () => {
+    if (isSettingsPopoverOpen) {
+      settingsPopover.style.display = 'none';
+      isSettingsPopoverOpen = false;
+    }
+  });
+
+  // Prevent popover from closing when clicking inside it
+  settingsPopover.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
   // Search functionality
   const searchBar = document.getElementById('scriptSearch');
   const scriptItems = document.querySelectorAll('.script-item');

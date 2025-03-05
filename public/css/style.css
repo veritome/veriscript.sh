@@ -5,8 +5,8 @@
   --accent-color: #083757;
   --text-color: #083757;
   --background-color: #FFFFE2;
-  --transition-colors: background-color 0.05s ease, color 0.05s ease, border-color 0.05s ease;
-  --transition-transform: transform 0.05s ease, box-shadow 0.05s ease;
+  --transition-colors: background-color 0.05s ease, color 0.05s ease;
+  --transition-transform: transform 0.05s ease;
 }
 
 [data-theme="dark"] {
@@ -34,9 +34,6 @@ header {
   background-color: var(--primary-color);
   padding: 0.5rem 1.5rem 2.5rem 1.5rem;  /* Increased bottom padding */
   text-align: center;
-  border: 3px solid var(--secondary-color);
-  border-radius: 12px;
-  box-shadow: 8px 8px 0px var(--secondary-color);
   margin: 1rem;
   position: relative;
   z-index: 10;
@@ -51,25 +48,20 @@ h1 {
 
 button {
   background-color: var(--primary-color);
-  border: 3px solid var(--secondary-color);
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 4px 4px 0px var(--secondary-color);
   transition: var(--transition-colors), var(--transition-transform);
 }
 
 button:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--secondary-color);
   background-color: var(--primary-color);
 }
 
 #themeToggle {
-  border: 3px solid var(--secondary-color);
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  box-shadow: 4px 4px 0px var(--secondary-color);
   transition: var(--transition-colors), var(--transition-transform);
   position: relative;
   margin: 0;
@@ -77,7 +69,6 @@ button:hover {
 
 #themeToggle:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--secondary-color);
 }
 
 #themeToggle i, .header-button i {
@@ -107,14 +98,9 @@ button:hover {
   width: 90%;
   max-width: 400px;
   background-color: var(--primary-color);
-  border-radius: 12px;
   padding: 2rem;
   text-align: center;
   font-size: 1.1rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border: 3px solid var(--secondary-color);
-  box-shadow: 8px 8px 0px var(--secondary-color);
-  border-radius: 0;
 }
 
 #codePopoverContainer {
@@ -123,27 +109,20 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--primary-color);
-  border-radius: 12px;
   padding: 2rem;
   width: 80%; /* Changed from 90% to 80% */
   max-width: none; /* Removed max-width constraint to allow true 80% width */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   text-align: center;
   max-height: 80vh; /* 80% of viewport height */
   overflow-y: auto; /* enables vertical scrolling */
-  border: 3px solid var(--secondary-color);
-  box-shadow: 8px 8px 0px var(--secondary-color);
-  border-radius: 0;
 }
 
 #codePopoverContainer pre {
   background-color: var(--background-color);
-  border-radius: 8px;
   padding: 1.5rem;
   margin: 1rem 0;
   overflow-x: auto;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   max-height: 70vh; /* slightly smaller than container */
   overflow-y: auto; /* enables vertical scrolling */
 }
@@ -170,16 +149,12 @@ footer {
   position: fixed;
   width: calc(100% - 2rem);
   bottom: 1rem;
-  margin: 0 1rem;
-  border: 3px solid var(--secondary-color);
-  border-radius: 12px;
-  box-shadow: 0 -8px 0px var(--secondary-color);
   z-index: 10;
 }
 
 footer p {
   margin: 0;
-  font-size: 1em;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);  /* Responsive font size */
 }
 
 .icon-left-padding {
@@ -201,10 +176,8 @@ footer p {
 }
 
 .brutalBox {
-  border: 3px solid var(--secondary-color);
   padding: 10px 20px;
   font-family: "veriscriptfont", sans-serif;
-  box-shadow: 8px 8px 0px var(--secondary-color);
   font-size: 1.2em;
 }
 
@@ -229,10 +202,6 @@ footer p {
   .card-container {
     padding: 10px;
     gap: 15px;
-  }
-
-  .category-card {
-    padding: 1rem;
   }
 
   .script-item {
@@ -261,18 +230,20 @@ footer p {
 .search-bar {
   width: 100%;
   padding: 1rem;
-  border: 3px solid var(--secondary-color);
   font-size: 1rem;
   transition: var(--transition-colors), var(--transition-transform);
-  background-color: var(--primary-color);
+  background-color: #083757; /* Navy background for light mode */
   color: var(--text-color);
-  box-shadow: 4px 4px 0px var(--secondary-color);
+}
+
+[data-theme="dark"] .search-bar {
+  background-color: #FFFFE2; /* Ivory background for dark mode */
+  color: #083757; /* Navy text for better contrast on ivory background */
 }
 
 .search-bar:focus {
   outline: none;
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--secondary-color);
 }
 
 /* Remove sidebar navigation styles */
@@ -285,7 +256,8 @@ footer p {
 .main-content {
   padding: 20px;
   width: 100%;
-  max-width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Remove mobile navigation menu styles */
@@ -303,33 +275,38 @@ footer p {
     max-width: 100%;
     padding: 10px;
   }
+  
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .script-item code {
+    max-width: 60%;
+  }
 }
 
 .category-card {
   background-color: var(--primary-color);
-  border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.2rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: var(--transition-colors), var(--transition-transform);
-  border: 3px solid var(--secondary-color);
-  box-shadow: 8px 8px 0px var(--secondary-color);
+  width: 100%;
 }
 
 .category-card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 10px 10px 0px var(--secondary-color);
 }
 
 .script-item {
   margin: 0.75rem 0;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 0.75rem;
   background-color: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: var(--transition-colors), var(--transition-transform);
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .script-item:hover {
@@ -351,8 +328,12 @@ footer p {
 
 /* Ensure the script name code remains larger */
 .script-item code {
-  font-size: 1.3em; /* larger script name */
+  font-size: 1.1em;
   transition: font-size 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
 }
 
 /* New rules for script icons */
@@ -388,6 +369,8 @@ footer p {
 /* Ensure header text doesn't overlap with buttons */
 header h1 {
   margin-top: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .header-instructions {
@@ -406,28 +389,35 @@ header h3 {
   header h1 {
     margin-top: 50px;  /* More space for stacked buttons on mobile */
   }
+  
+  .top-right-icons {
+    top: 10px;
+    right: 10px;
+    gap: 15px;
+  }
+  
+  .info-icon, .settings-icon {
+    font-size: 1.1rem;
+  }
 }
 
 .header-button {
   background-color: var(--primary-color);
-  border: 3px solid var(--secondary-color);
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 4px 4px 0px var(--secondary-color);
   transition: var(--transition-colors), var(--transition-transform);
   font-family: "veriscriptfont", sans-serif;
-  border-radius: 8px;
   width: 180px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: var(--text-color);
+  margin-bottom: 10px;
 }
 
 .header-button:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--secondary-color);
   background-color: var(--primary-color);
 }
 
@@ -463,25 +453,85 @@ header h3 {
   opacity: 1;
 }
 
-.info-popover {
+.info-popover, .settings-popover {
   display: none;
   position: absolute;
   background-color: var(--primary-color);
-  border: 2px solid var(--secondary-color);
-  box-shadow: 4px 4px 0px var(--secondary-color);
   padding: 1rem;
-  border-radius: 4px;
   font-size: 0.9rem;
   line-height: 1.4;
-  max-width: 250px;
   text-align: left;
   z-index: 100;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 100%;
-  margin-top: 0.5rem;
+  box-sizing: border-box;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.info-icon:hover + .info-popover {
+.info-popover {
+  max-width: 250px;
+  right: 0;
+  top: 100%;
+  margin-top: 5px;
+}
+
+.settings-popover {
+  min-width: 200px;
+  /* Position will be set via JavaScript */
+  position: fixed; /* Changed from absolute to fixed for viewport positioning */
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.icon-wrapper:hover .info-popover,
+.info-popover:hover {
   display: block;
+}
+
+.settings-icon {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  vertical-align: super;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.settings-icon:hover {
+  opacity: 1;
+}
+
+.top-right-icons {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 20px;
+  z-index: 100;
+}
+
+.icon-wrapper {
+  position: relative;
+}
+
+.info-icon, .settings-icon {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+.info-icon:hover, .settings-icon:hover {
+  opacity: 1;
+}
+
+.settings-icon:hover {
+  /* Removed rotation effect since we're using click instead of hover */
+}
+
+.settings-popover .header-button {
+  margin: 10px 0;
+  width: 100%;
+  min-width: 180px;
 }
