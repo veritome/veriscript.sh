@@ -33,7 +33,7 @@
     .card-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: clamp(10px, 2vw, 20px);
+      gap: clamp(40px, 5vw, 60px);
       padding: clamp(10px, 2vw, 20px);
       margin-bottom: 60px;
       max-width: 50vw;
@@ -44,6 +44,9 @@
     .category-card {
       padding: clamp(12px, 1.5vw, 20px);
       background-color: var(--primary-color);
+      margin: 10px;
+      /* border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
     }
     
     .category-title {
@@ -109,6 +112,11 @@
       .card-container {
         grid-template-columns: 1fr;
         max-width: 90vw;
+        gap: 30px; /* Specific gap for mobile to ensure proper spacing when stacked */
+      }
+      
+      .category-card {
+        margin: 5px; /* Reduced margin on mobile */
       }
       
       .script-item {

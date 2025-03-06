@@ -11,12 +11,7 @@ export const contentConfig = {
             {
               name: 'listening-ports',
               path: 'public/content/shell/network/listening-ports.sh',
-              format: 'sh',
-              metadata: {
-                lastUpdated: '2023-12-01',
-                author: 'Veritome',
-                dependencies: 'None'
-              }
+              format: 'sh'
             }
           ]
         },
@@ -27,42 +22,17 @@ export const contentConfig = {
             {
               name: 'ssh/generate',
               path: 'public/content/shell/security/ssh/generate.sh',
-              format: 'sh',
-              metadata: {
-                lastUpdated: '2023-12-01',
-                author: 'Veritome',
-                dependencies: 'OpenSSH'
-              }
+              format: 'sh'
             },
             {
               name: 'ssh/backup',
               path: 'public/content/shell/security/ssh/backup.sh',
-              format: 'sh',
-              metadata: {
-                lastUpdated: '2023-12-01',
-                author: 'Veritome',
-                dependencies: 'OpenSSH'
-              }
+              format: 'sh'
             },
             {
-              name: 'gpg/generate',
-              path: 'public/content/shell/security/gpg/generate.sh',
-              format: 'sh',
-              metadata: {
-                lastUpdated: '2023-12-01',
-                author: 'Veritome',
-                dependencies: 'GnuPG'
-              }
-            },
-            {
-              name: 'gpg/backup',
-              path: 'public/content/shell/security/gpg/backup.sh',
-              format: 'sh',
-              metadata: {
-                lastUpdated: '2023-12-01',
-                author: 'Veritome',
-                dependencies: 'GnuPG'
-              }
+              name: 'gpg/utility',
+              path: 'public/content/shell/security/gpg/gpg-utility.sh',
+              format: 'sh'
             }
           ]
         }
@@ -79,12 +49,7 @@ export const contentConfig = {
             {
               name: 'install nvm',
               path: 'public/content/tools/install_nvm.sh',
-              format: 'sh',
-              metadata: {
-                lastUpdated: '2023-12-01',
-                author: 'Veritome',
-                dependencies: 'None'
-              }
+              format: 'sh'
             }
           ]
         }

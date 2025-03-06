@@ -41,6 +41,16 @@ function createScriptItem(script) {
   codeElement.textContent = script.name;
 
   leftContent.appendChild(codeElement);
+  
+  // Add metadata for search functionality
+  if (script.metadata) {
+    const metadataElement = document.createElement('div');
+    metadataElement.className = 'script-metadata';
+    metadataElement.textContent = Object.entries(script.metadata)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join(', ');
+    leftContent.appendChild(metadataElement);
+  }
 
   const rightContent = document.createElement('div');
   const eyeIcon = document.createElement('i');
@@ -182,4 +192,43 @@ document.addEventListener('DOMContentLoaded', () => {
       
     }
   });
+
+  // Initialize search functionality after content is loaded
+  initializeSearch();
 });
+
+// Search functionality
+function initializeSearch() {
+  const searchBar = document.getElementById('scriptSearch');
+  const scriptItems = document.querySelectorAll('.script-item');
+  const categories = document.querySelectorAll('.category-card');
+  const sections = document.querySelectorAll('.category-card h3');
+
+  searchBar.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    let hasVisibleItems = false;
+    
+    scriptItems.forEach(item => {
+      const scriptName = item.querySelector('code').textContent.toLowerCase();
+      const metadata = item.querySelector('.script-metadata')?.textContent.toLowerCase() || '';
+      const matches = scriptName.includes(searchTerm) || metadata.includes(searchTerm);
+      item.style.display = matches ? '' : 'none';
+      if (matches) hasVisibleItems = true;
+    });
+
+    // Show/hide sections based on visible items
+    sections.forEach(section => {
+      const nextElement = section.nextElementSibling;
+      if (nextElement) {
+        const visibleItems = Array.from(nextElement.querySelectorAll('.script-item')).some(item => item.style.display !== 'none');
+        section.style.display = visibleItems ? '' : 'none';
+      }
+    });
+
+    // Show/hide categories based on visible items
+    categories.forEach(category => {
+      const visibleItems = Array.from(category.querySelectorAll('.script-item')).some(item => item.style.display !== 'none');
+      category.style.display = visibleItems ? '' : 'none';
+    });
+  });
+}
